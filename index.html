@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maulana- Portfolio</title>
+    <title>Ade Maulana - Virtual Assistant Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,474 +14,739 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop') center/cover fixed;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            position: relative;
+        :root {
+            --bg-gradient-start: #667eea;
+            --bg-gradient-end: #764ba2;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --accent: #667eea;
+            --accent-hover: #5568d3;
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 60px;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(3px);
-            z-index: 0;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
         }
 
         .container {
-            position: relative;
-            z-index: 1;
             max-width: 600px;
-            width: 100%;
+            margin: 0 auto;
+            padding: var(--space-lg) var(--space-md);
         }
 
         .card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            animation: fadeInScale 0.8s ease;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: var(--space-xl) 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            margin-bottom: var(--space-lg);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
 
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .header {
-            padding: 4rem 3rem 2rem;
+        /* Hero Section */
+        .hero {
             text-align: center;
+            padding-bottom: var(--space-lg);
         }
 
-        .profile-img {
+        .profile-photo {
             width: 120px;
             height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 1.5rem;
-            border: 4px solid #f0f0f0;
+            margin-bottom: var(--space-md);
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .name {
-            font-size: 2.5rem;
-            font-weight: 400;
-            color: #333;
-            margin-bottom: 0.5rem;
-            line-height: 1.2;
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
         }
 
-        .title {
-            font-size: 1rem;
-            color: #999;
-            font-weight: 400;
-            margin-bottom: 2rem;
-            font-family: 'Arial', sans-serif;
+        .tagline {
+            font-size: 14px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-md);
+            line-height: 1.8;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
         }
 
         .social-link {
-            color: #666;
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--accent);
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .social-link:hover {
-            color: #FF7F50;
+            background: var(--accent);
+            color: white;
             transform: translateY(-3px);
         }
 
-        .scroll-btn {
-            width: 50px;
-            height: 50px;
-            background: #FF7F50;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
+        .social-link svg {
+            width: 18px;
+            height: 18px;
         }
 
-        .scroll-btn:hover {
-            background: #ff6a3d;
+        .scroll-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff9a56, #ff6b6b);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator:hover {
             transform: translateY(3px);
         }
 
-        .content-section {
-            padding: 3rem;
-            border-top: 1px solid #f0f0f0;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
 
+        /* Section Styles */
         .section-title {
-            font-size: 2rem;
-            font-weight: 400;
-            color: #333;
-            margin-bottom: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
             text-align: center;
         }
 
-        .section-text {
-            color: #888;
-            font-size: 1rem;
+        .section-content {
+            color: var(--text-secondary);
+            font-size: 15px;
             line-height: 1.8;
-            text-align: center;
-            font-family: 'Arial', sans-serif;
-            margin-bottom: 2rem;
         }
 
-        .gallery {
+        .section-content p {
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Competencies Grid */
+        .competencies-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
+            margin-top: var(--space-md);
         }
 
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
+        .competency-item {
+            padding: var(--space-md);
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .competency-item h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .competency-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .competency-item li {
+            padding: 4px 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .competency-item li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-right: 8px;
+        }
+
+        /* Experience Card */
+        .experience-card {
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 12px;
+            padding: var(--space-md);
+            margin-top: var(--space-md);
+        }
+
+        .experience-header {
+            margin-bottom: var(--space-sm);
+        }
+
+        .experience-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .experience-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .experience-highlight {
+            font-size: 15px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .experience-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: var(--space-sm);
+            margin-bottom: var(--space-xs);
+        }
+
+        .experience-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-card li {
+            padding: 6px 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .experience-card li::before {
+            content: "▸";
+            color: var(--accent);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-right: 8px;
+        }
+
+        .results-list {
+            margin-top: var(--space-sm);
+        }
+
+        .results-list li::before {
+            content: "✓";
+            color: #10b981;
+        }
+
+        .tools-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px 4px 4px 0;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        .service-item {
+            padding: var(--space-sm);
+            background: rgba(102, 126, 234, 0.05);
             border-radius: 8px;
-            cursor: pointer;
-            aspect-ratio: 1;
         }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+        .service-item h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
+        .service-item h4::before {
+            content: "✓";
+            color: #10b981;
+            margin-right: 8px;
+            font-weight: bold;
         }
 
-        .gallery-item:nth-child(3) {
-            grid-column: 1 / -1;
+        .service-item p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin: 0;
         }
 
-        .cta-section {
-            text-align: center;
-            padding: 3rem;
-            border-top: 1px solid #f0f0f0;
+        /* Tools Section */
+        .tools-section {
+            margin-top: var(--space-md);
         }
 
-        .cta-title {
-            font-size: 2rem;
-            font-weight: 400;
-            color: #333;
-            margin-bottom: 1.5rem;
+        .tool-category {
+            margin-bottom: var(--space-sm);
+        }
+
+        .tool-category strong {
+            color: var(--text-primary);
+            font-size: 15px;
+        }
+
+        /* Strengths Grid */
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        .strength-item {
+            padding: var(--space-sm);
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+        }
+
+        .strength-item::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .strength-item strong {
+            color: var(--text-primary);
+        }
+
+        /* Contact Section */
+        .contact-form {
+            margin-top: var(--space-md);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
+            margin-bottom: var(--space-sm);
         }
 
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #666;
-            font-size: 0.9rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .form-input,
-        .form-textarea {
+        .form-group input,
+        .form-group textarea {
             width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-family: 'Arial', sans-serif;
+            padding: 12px 16px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
             transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
         }
 
-        .form-input:focus,
-        .form-textarea:focus {
+        .form-group input:focus,
+        .form-group textarea:focus {
             outline: none;
-            border-color: #FF7F50;
+            border-color: var(--accent);
+            background: white;
         }
 
-        .form-textarea {
+        .form-group textarea {
             resize: vertical;
             min-height: 120px;
         }
 
         .submit-btn {
-            background: #FF7F50;
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #ff9a56, #ff6b6b);
             color: white;
             border: none;
-            padding: 1rem 3rem;
-            border-radius: 50px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .submit-btn:hover {
-            background: #ff6a3d;
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(255, 127, 80, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
+        .contact-info {
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 2px solid rgba(102, 126, 234, 0.1);
+            text-align: center;
         }
 
-        .modal.active {
+        .contact-links {
             display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
         }
 
-        .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-            position: relative;
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s ease;
         }
 
-        .modal-content img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 8px;
+        .contact-link:hover {
+            background: var(--accent);
+            color: white;
         }
 
-        .modal-close {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            background: white;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            color: #333;
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            background: white;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 2000;
-            border-left: 4px solid #48bb78;
-        }
-
-        .notification.show {
-            transform: translateX(0);
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            padding: var(--space-lg) 0;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            body {
-                padding: 1rem;
+            .container {
+                padding: var(--space-md) var(--space-sm);
             }
 
-            .header {
-                padding: 3rem 2rem 1.5rem;
+            .card {
+                padding: var(--space-lg) var(--space-md);
             }
 
-            .name {
-                font-size: 2rem;
+            h1 {
+                font-size: 32px;
             }
 
-            .content-section,
-            .cta-section {
-                padding: 2rem;
-            }
-
-            .section-title,
-            .cta-title {
-                font-size: 1.5rem;
-            }
-
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-item:nth-child(3) {
-                grid-column: 1;
+            .section-title {
+                font-size: 24px;
             }
         }
 
-        /* Smooth Scroll Animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
+        @media (min-width: 768px) {
+            .competencies-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+            .strengths-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="card">
-            <!-- Header Section -->
-            <div class="header">
-                <img src="https://raw.githubusercontent.com/monde-hana/portfolio-monde/main/img_monde.jpg" alt="Profile" class="profile-img">
-                <h1 class="name">Ade Maulana</h1>
-                <p class="title">Data Entry Experience, Virtual Assistant</p>
+        <!-- Hero Section -->
+        <div class="card visible" id="hero">
+            <div class="hero">
+                <img src="https://raw.githubusercontent.com/monde-hana/portfolio-monde/main/IMG_MONDE.jpg" alt="Ade Maulana" class="profile-photo">
+                <h1>Ade Maulana</h1>
+                <p class="tagline">Document Control Specialist | 9 Years in Telecom Projects | Now Your Virtual Assistant</p>
                 
                 <div class="social-links">
-                    <a href="https://t.me/ademonde" class="social-link" title="Telegram">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    <a href="https://www.behance.net" class="social-link" title="Behance" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/>
                         </svg>
                     </a>
-                    <a href="https://github.com/monde-hana" class="social-link" title="Whatsapp">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 0c-6.628 0-12 5.373-12 12s5.372 12 12 12 12-5.373 12-12-5.372-12-12-12zm9.885 11.441c-2.575-.422-4.943-.445-7.103-.073-.244-.563-.497-1.125-.767-1.68 2.31-1 4.165-2.358 5.548-4.082 1.35 1.594 2.197 3.619 2.322 5.835zm-3.842-7.282c-1.205 1.554-2.868 2.783-4.986 3.68-1.016-1.861-2.178-3.676-3.488-5.438.779-.197 1.591-.314 2.431-.314 2.275 0 4.368.779 6.043 2.072zm-10.516-.993c1.331 1.742 2.511 3.538 3.537 5.381-2.43.715-5.331 1.082-8.684 1.105.692-2.835 2.601-5.193 5.147-6.486zm-5.44 8.834l.013-.256c3.849-.005 7.169-.448 9.95-1.322.233.475.456.952.67 1.432-3.38 1.057-6.165 3.222-8.337 6.48-1.432-1.719-2.296-3.927-2.296-6.334zm3.829 7.81c1.969-3.088 4.482-5.098 7.598-6.027.928 2.42 1.609 4.91 2.043 7.46-3.349 1.291-7.116.668-9.641-1.433zm11.586.43c-.438-2.353-1.08-4.653-1.92-6.897 1.876-.265 3.94-.196 6.199.196-.437 2.786-2.028 5.192-4.279 6.701z"/>
+                    <a href="https://dribbble.com" class="social-link" title="Dribbble" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.628 0-12 5.373-12 12s5.372 12 12 12 12-5.373 12-12-5.372-12-12-12zm9.885 11.441c-2.575-.422-4.943-.445-7.103-.073-.244-.563-.497-1.125-.767-1.68 2.31-1 4.165-2.358 5.548-4.082 1.35 1.594 2.197 3.619 2.322 5.835zm-3.842-7.282c-1.205 1.554-2.868 2.783-4.986 3.68-1.016-1.861-2.178-3.676-3.488-5.438.779-.197 1.591-.314 2.431-.314 2.275 0 4.368.779 6.043 2.072zm-10.516-2.072c.1.057.199.118.296.183 1.352 1.799 2.548 3.645 3.587 5.533-2.43.715-5.331 1.082-8.684 1.105.692-3.552 3.528-6.39 7.801-6.821zm-7.527 8.913c4.134-.015 7.309-.448 9.526-1.298.274.596.524 1.198.769 1.805-1.867.514-3.433 1.375-4.699 2.582-1.519 1.447-2.531 3.221-3.038 5.325-1.819-1.593-2.977-3.916-2.977-6.533 0-.763.091-1.505.267-2.212.068.02.135.041.202.059-.019-.038-.041-.075-.062-.112.008-.004.016-.007.024-.011.012-.004.023-.009.035-.013.001 0 .001 0 .002-.001.003-.001.005-.002.008-.003.004-.001.008-.003.012-.004zm3.843 8.722c.464-1.879 1.34-3.446 2.627-4.701 1.135-1.107 2.521-1.848 4.158-2.227.236.598.46 1.201.671 1.808 1.396 4.009 2.235 8.157 2.52 12.425-1.214.494-2.531.766-3.912.766-2.998 0-5.699-1.391-7.464-3.559.188-.089.377-.177.567-.268.009.004.018.008.027.012-.003-.001-.006-.002-.009-.003zm9.929 3.559c-.27-4.015-1.057-7.944-2.359-11.792.064-.019.128-.038.192-.057 2.016-.611 4.181-.559 6.487.155-.463 4.725-3.538 8.675-7.765 10.694h.445z"/>
                         </svg>
                     </a>
-                    <a href="https://raw.githubusercontent.com/monde-hana/portfolio-monde/main/instagram.png" class="social-link" title="Instagram">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <a href="https://twitter.com" class="social-link" title="Twitter" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com" class="social-link" title="Instagram" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
                     </a>
-                    <a href="mailto:ademaulana.s91@gmail.com" class="social-link" title="Email">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/>
+                    <a href="mailto:ademaulanasukma@gmail.com" class="social-link" title="Email">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
                         </svg>
                     </a>
                 </div>
 
-                <button class="scroll-btn" onclick="scrollToContent()">↓</button>
-            </div>
-
-            <!-- Content Section -->
-            <div class="content-section fade-in" id="content">
-                <h2 class="section-title">Gravida</h2>
-                <p class="section-text">
-                    Eu elit nibh vitae auctor eu. Elementum eu facilisis sed odio morbi quis. Mattis enim id tellus elementum sagittae vitae et nibis.
-                </p>
-
-                <div class="gallery">
-                    <div class="gallery-item" onclick="openImage('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=800&fit=crop')">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=800&fit=crop" alt="Digital Art 1">
-                    </div>
-                    <div class="gallery-item" onclick="openImage('https://images.unsplash.com/photo-1634193295627-1cdddf751ebf?w=800&h=800&fit=crop')">
-                        <img src="https://images.unsplash.com/photo-1634193295627-1cdddf751ebf?w=800&h=800&fit=crop" alt="Digital Art 2">
-                    </div>
-                    <div class="gallery-item" onclick="openImage('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=600&fit=crop')">
-                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=600&fit=crop" alt="Art Tools">
-                    </div>
-                </div>
-
-                <div style="text-align: center;">
-                    <button class="scroll-btn" onclick="scrollToContact()">↓</button>
+                <div class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                    </svg>
                 </div>
             </div>
+        </div>
 
-            <!-- Contact Section -->
-            <div class="cta-section fade-in" id="contact">
-                <h2 class="cta-title">Etiam Adipiscing</h2>
+        <!-- About Section -->
+        <div class="card" id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="section-content">
+                <p>Saya Ade Maulana, Document Control Specialist dengan 9 tahun pengalaman mengelola dokumentasi proyek telekomunikasi untuk Nokia bersama operator besar seperti Telkomsel, XL Axiata, dan Indosat Ooredoo.</p>
                 
-                <form id="contactForm" onsubmit="handleSubmit(event)">
-                    <div class="form-group">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-input" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-input" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea class="form-textarea" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
+                <p>Keahlian saya mencakup data entry & validation, document control, project monitoring, dan persiapan kelengkapan invoice. Terbiasa bekerja dengan standar korporat ketat, deadline harian, dan koordinasi multi-tim antara lapangan dan manajemen.</p>
+                
+                <p>Saat ini saya fokus membantu bisnis dan profesional sebagai Virtual Assistant yang reliable—khususnya dalam pengelolaan data, dokumentasi proyek, dan administrative support yang presisi dan terstruktur.</p>
+                
+                <p><strong>Saya tersedia untuk kerja sama part-time remote dengan komitmen penuh terhadap kualitas dan ketepatan waktu.</strong></p>
+            </div>
+        </div>
+
+        <!-- Core Competencies -->
+        <div class="card" id="competencies">
+            <h2 class="section-title">Core Competencies</h2>
+            <div class="competencies-grid">
+                <div class="competency-item">
+                    <h3>📊 Data Management</h3>
+                    <ul>
+                        <li>High-volume data entry (50+ entries daily)</li>
+                        <li>Data validation & quality control</li>
+                        <li>Database maintenance & cleanup</li>
+                    </ul>
+                </div>
+                
+                <div class="competency-item">
+                    <h3>📁 Document Control</h3>
+                    <ul>
+                        <li>Project documentation lifecycle management</li>
+                        <li>Filing system design & maintenance</li>
+                        <li>Version control & document tracking</li>
+                    </ul>
+                </div>
+                
+                <div class="competency-item">
+                    <h3>📈 Project Support</h3>
+                    <ul>
+                        <li>Progress monitoring & status reporting</li>
+                        <li>Stakeholder coordination (field teams, management, clients)</li>
+                        <li>Invoice & deliverables preparation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="card" id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title">Nokia Telecom Projects (Telkomsel, XL, Indosat)</div>
+                    <div class="experience-subtitle">Document Control & Project Administration | 2016-2024</div>
+                    <div class="experience-highlight">Managed documentation for 5,000+ telecom sites across Indonesia</div>
+                </div>
+                
+                <p>Managed full project documentation lifecycle for national telecom infrastructure projects including site surveys, ATP (Acceptance Test Procedures), technical drawings, and invoice supporting documents.</p>
+                
+                <h4>Key Responsibilities:</h4>
+                <ul>
+                    <li>Daily data entry & validation for 50+ active sites per project cycle</li>
+                    <li>Document control for survey reports, technical drawings, and ATP documents</li>
+                    <li>Progress monitoring & reporting to project management</li>
+                    <li>Invoice preparation & supporting document validation</li>
+                </ul>
+                
+                <h4>Results:</h4>
+                <ul class="results-list">
+                    <li>Maintained 98%+ document accuracy across all project phases</li>
+                    <li>Ensured on-time invoice submission for 200+ sites annually</li>
+                    <li>Reduced document revision cycles by coordinating with field teams proactively</li>
+                    <li>Zero critical delays due to missing documentation in 9 years</li>
+                    <li>Successfully processed documentation for 5,000+ telecom sites with zero data loss or critical compliance issues</li>
+                </ul>
+                
+                <div style="margin-top: 16px;">
+                    <span class="tools-tag">Microsoft Excel</span>
+                    <span class="tools-tag">Microsoft Word</span>
+                    <span class="tools-tag">Google Drive</span>
+                    <span class="tools-tag">Email Management</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- What I Can Help You With -->
+        <div class="card" id="services">
+            <h2 class="section-title">What I Can Help You With</h2>
+            <p class="section-content" style="text-align: center; margin-bottom: 24px;">Whether you're a business owner, consultant, or team leader, I can support you with:</p>
+            
+            <div class="services-grid">
+                <div class="service-item">
+                    <h4>Data Entry & Database Management</h4>
+                    <p>Clean, accurate data input for CRM, spreadsheets, or project management tools</p>
+                </div>
+                
+                <div class="service-item">
+                    <h4>Document Organization & Control</h4>
+                    <p>Create filing systems, manage document versions, ensure compliance</p>
+                </div>
+                
+                <div class="service-item">
+                    <h4>Administrative Support</h4>
+                    <p>Email management, scheduling, report preparation, invoice processing</p>
+                </div>
+                
+                <div class="service-item">
+                    <h4>Project Documentation</h4>
+                    <p>Track progress, maintain records, prepare deliverables for clients</p>
+                </div>
+            </div>
+            
+            <p class="section-content" style="text-align: center; margin-top: 24px;"><em>Available for ongoing retainer or project-based work.</em></p>
+        </div>
+
+        <!-- Technical Tools -->
+        <div class="card" id="tools">
+            <h2 class="section-title">Technical Tools</h2>
+            <div class="tools-section">
+                <div class="tool-category">
+                    <strong>Advanced:</strong> Microsoft Excel (Formulas, Pivot Tables, Data Validation)
+                </div>
+                <div class="tool-category">
+                    <strong>Proficient:</strong> Microsoft Word, Google Workspace (Docs, Sheets, Drive)
+                </div>
+                <div class="tool-category">
+                    <strong>Familiar:</strong> Project management systems, Cloud storage solutions
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Strengths -->
+        <div class="card" id="strengths">
+            <h2 class="section-title">Professional Strengths</h2>
+            <div class="strengths-grid">
+                <div class="strength-item">
+                    <strong>Deadline Management</strong> — 9 years meeting daily/weekly project deadlines
+                </div>
+                <div class="strength-item">
+                    <strong>Attention to Detail</strong> — 98%+ accuracy rate in document processing
+                </div>
+                <div class="strength-item">
+                    <strong>Client-Focused</strong> — Experience with corporate standards (Telkomsel, XL, Indosat)
+                </div>
+                <div class="strength-item">
+                    <strong>Self-Directed</strong> — Proven remote work capability with minimal supervision
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="card" id="contact">
+            <h2 class="section-title">Let's Work Together</h2>
+            <p class="section-content" style="text-align: center; margin-bottom: 24px;">
+                Need a VA who can handle your data and documentation with precision?<br>
+                I'm available for part-time remote collaboration starting immediately.
+            </p>
+            
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/xnnekplq" method="POST">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    Send Message
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </form>
+            
+            <div class="contact-info">
+                <p style="margin-bottom: 16px; color: var(--text-muted);">→ Or reach out directly:</p>
+                <div class="contact-links">
+                    <a href="mailto:ademaulanasukma@gmail.com" class="contact-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
+                        </svg>
+                        Email
+                    </a>
+                    <a href="https://t.me/ademonde" class="contact-link" target="_blank">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                        </svg>
+                        Telegram
+                    </a>
+                    <a href="https://www.linkedin.com/in/ademaulana/" class="contact-link" target="_blank">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal" id="modal" onclick="closeModal()">
-        <button class="modal-close" onclick="closeModal()">✕</button>
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <img id="modalImage" src="" alt="Full size image">
-        </div>
-    </div>
-
-    <!-- Notification -->
-    <div class="notification" id="notification">
-        <p id="notificationText"></p>
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2024 Ade Maulana. All rights reserved.</p>
     </div>
 
     <script>
-        // Smooth scroll to content
-        function scrollToContent() {
-            document.getElementById('content').scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        // Smooth scroll to contact
-        function scrollToContact() {
-            document.getElementById('contact').scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        // Scroll animation
+        // Intersection Observer for scroll animations
         const observerOptions = {
-            threshold: 0.2,
+            threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
@@ -490,79 +758,30 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // Open image in modal
-        function openImage(src) {
-            const modal = document.getElementById('modal');
-            const modalImage = document.getElementById('modalImage');
-            modalImage.src = src;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close modal
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Handle ESC key to close modal
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
+        // Observe all cards except the hero
+        document.querySelectorAll('.card:not(#hero)').forEach(card => {
+            observer.observe(card);
         });
 
-        // Form submission
-        function handleSubmit(e) {
-            e.preventDefault();
-            const form = e.target;
-            const name = form.name.value;
-            
-            showNotification(`Thank you ${name}! Your message has been sent successfully.`);
-            form.reset();
-        }
-
-        // Notification
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            const notificationText = document.getElementById('notificationText');
-            
-            notificationText.textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
-        // Add smooth scroll behavior for all anchor links
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });
+
+        // Form submission handler (optional - for custom handling)
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            // Form will submit to Formspree - add YOUR_FORM_ID in the action attribute
+            // You can add custom handling here if needed
+        });
     </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
